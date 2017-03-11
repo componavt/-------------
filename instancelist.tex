@@ -1,30 +1,30 @@
-\textbf{Экземпляры объекта "Язык программирования"}
+\textbf{Экземпляры объекта "Страна"}
 
 \begin{itemize}
-    \item Объект: \href{https://www.wikidata.org/wiki/Q9143}{язык программирования (Q9143)},
+    \item Объект: \href{https://www.wikidata.org/wiki/Q6256}{страна (Q6256)},
     \item Свойство: \href{https://www.wikidata.org/wiki/Property:P31}{instance of (P31)}.
 \end{itemize}
 
-Построим список всех языков.
+Построим список всех cтран.
 
 \begin{lstlisting}[language=SPARQL]
-#List of `instances of` "programming language" 
+#List of `instances of` "country" 
 SELECT ?lang ?langLabel
 WHERE
 {
-    ?lang wdt:P31 wd:Q9143.
+    ?lang wdt:P31 wd:Q6256.
     SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
 }
 \end{lstlisting}
 
-\href{https://query.wikidata.org/#%23added%202016-10%0A%23List%20of%20%60instances%20of%60%20%22programming%20language%22%20%0ASELECT%20%3Flang%20%3FlangLabel%0AWHERE%0A%7B%0A%20%20%20%20%3Flang%20wdt%3AP31%20wd%3AQ9143.%0A%20%20%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20%7D%0A%7D}{SPARQL query} 732 Results
+\href{https://query.wikidata.org/#%23added%202017-02%0A%23List%20of%20%60instances%20of%60%20%22country%22%20%0ASELECT%20%3Flang%20%3FlangLabel%0AWHERE%0A%7B%0A%20%20%20%20%3Flang%20wdt%3AP31%20wd%3AQ6256.%0A%20%20%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20%7D%0A%7D }{SPARQL query} 198 Results
 
-👍 Наиболее полными и проработанными языками программирования на Викиданных являются:
-\href{https://www.wikidata.org/wiki/Q251}{Java}, 
-\href{https://www.wikidata.org/wiki/Q28865}{Python},
-\href{https://www.wikidata.org/wiki/Q15777}{C}.
+👍 Наиболее полными и проработанными странами на Викиданных являются:
+\href{https://www.wikidata.org/wiki/Q30}{Соединённые Штаты Америки}, 
+\href{https://www.wikidata.org/wiki/Q16}{Канада},
+\href{https://www.wikidata.org/wiki/Q29}{Испания}.
 
-👎 Почти пустыми и малоинформативными языками оказались:
-\href{https://www.wikidata.org/wiki/Q165372}{CLIPS},
-\href{https://www.wikidata.org/wiki/Q959549}{shell script},
-\href{https://www.wikidata.org/wiki/Q1268744}{Dylan}.
+👎Почти пустыми и малоинформативными странами оказались:
+\href{https://www.wikidata.org/wiki/Q40362}{Сахарская Арабская Демократическая Республика},
+\href{https://www.wikidata.org/wiki/Q907112}{Приднестровская Молдавская Республика},
+\href{https://www.wikidata.org/wiki/Q1246}{Косово}.
