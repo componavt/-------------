@@ -12,8 +12,8 @@
 SELECT ?country ?countryLabel ?inception
 WHERE
 {
-    ?country wdt:P31 wd:Q6256.
-    ?country wdt:P571 ?inception .
+    ?country wdt:P31 wd:Q6256.       #country
+    ?country wdt:P571 ?inception .   #inception of country
     
     SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
 }
