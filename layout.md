@@ -1,3 +1,5 @@
+figures/Neighboring countries graph according to Wikidata1/Neighboring countries graph according to Wikidata1.png
+92a6.html
 remark.tex
 instancelist.tex
 age_of_contries.tex
