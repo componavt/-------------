@@ -5,3 +5,4 @@ completeness_of_data.tex
 demonym.tex
 subjects_government.tex
 shares_border_with.tex
+figures/Bubble chart forms of government countries according to Wikidata1/Bubble chart forms of government countries according to Wikidata1.svg
