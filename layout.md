@@ -1,3 +1,4 @@
+figures/bubblegovernment1/bubblegovernment1.png
 remark.tex
 instancelist.tex
 age_of_contries.tex
