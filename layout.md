@@ -5,4 +5,5 @@ age_of_contries.tex
 completeness_of_data.tex
 subjects_government.tex
 figures/bubblegovernment1/bubblegovernment1.png
+shares_border_with.tex
 figures/neighbours1/neighbours1.png
