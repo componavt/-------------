@@ -6,3 +6,16 @@
 \item Объект: \href{https://www.wikidata.org/wiki/Q6256}{страна (Q6256)},
 \item Свойство: \href{https://www.wikidata.org/wiki/Property:P1549}{этнохороним (P1549)}.
 \end{itemize}
+
+\begin{lstlisting}[language=SPARQL]
+#List of countries with demonyms in Russian
+SELECT ?country ?countryLabel 
+WHERE
+{
+?country wdt:P31 wd:Q6256. #country
+?country wdt:P1549 ?demonym . #demonym
+FILTER((LANG(?demonym)) = "ru")
+SERVICE wikibase:label { bd:serviceParam wikibase:language "ru" }
+}
+GROUP BY ?country ?countryLabel
+\end{lstlisting}
