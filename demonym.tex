@@ -54,7 +54,7 @@ WHERE
 {
 ?country wdt:P31 wd:Q6256. # country
 MINUS {?country wdt:P1549 ?demonym. # except with demonyms
-FILTER((LANG(?demonym)) = "ru") # in Russian
+    FILTER((LANG(?demonym)) = "ru") # in Russian
 } 
 
 SERVICE wikibase:label { bd:serviceParam wikibase:language "ru" }
