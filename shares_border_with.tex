@@ -15,7 +15,7 @@ WHERE
 {
     ?country wdt:P31 wd:Q6256.                         #countries
 
-    SERVICE wikibase:label { bd:serviceParam wikibase:language "" }
+    SERVICE wikibase:label { bd:serviceParam wikibase:language "ru" }
     OPTIONAL { ?country wdt:P47 ?sharesBorderWith . }  #shares border with
 }
 \end{lstlisting}
