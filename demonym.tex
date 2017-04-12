@@ -73,15 +73,16 @@ GROUP BY ?country ?countryLabel
 Выведем список стран, упорядоченный по количеству заполненных в Викиданных этнохоронимов.
 
 \begin{lstlisting}[language=SPARQL]
-#Count of demonyms in countries
-SELECT  ?country ?countryLabel (count(*) as ?count)
+#List of countries without demonyms in Russian
+SELECT ?country ?countryLabel 
 WHERE
 {
-	?country wdt:P31 wd:Q6256.      #country
-	?country wdt:P1549 ?demonym .   #demonym
-	SERVICE wikibase:label { bd:serviceParam wikibase:language "ru" }
-}
+?country wdt:P31 wd:Q6256. # country
+MINUS {?country wdt:P1549 ?demonym. # except with demonyms
+    FILTER((LANG(?demonym)) = "ru") # in Russian
+} 
 
-GROUP BY ?country ?countryLabel 
-ORDER BY DESC (?count)
+SERVICE wikibase:label { bd:serviceParam wikibase:language "ru" }
+}
+GROUP BY ?country ?countryLabel
 \end{lstlisting}
