@@ -76,7 +76,9 @@ GROUP BY ?country ?countryLabel
 #Count of demonyms in countries
 SELECT  ?country ?countryLabel (count(*) as ?count)
 WHERE
-
+{
+	?country wdt:P31 wd:Q6256.      #country
+	?country wdt:P1549 ?demonym .   #demonym
 	SERVICE wikibase:label { bd:serviceParam wikibase:language "ru" }
 }
 
