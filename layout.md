@@ -7,6 +7,5 @@ demonym.tex
 subjects_government.tex
 shares_border_with.tex
 figures/Bubble chart forms of government countries according to Wikidata/Bubble chart forms of government countries according to Wikidata.png
-1a4b.html
 figures/Neighboring countries graph in russian according to Wikidata/Neighboring countries graph in russian according to Wikidata.png
 6cb3.html
