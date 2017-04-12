@@ -68,3 +68,20 @@ GROUP BY ?country ?countryLabel
 
 После заполнения авторами статьи этнохоронимов, число стран, у которых их нет на русском языке стало 69, а самих этнохоронимов на русском теперь языке 276 (на 20 марта 2017 года)
 
+\subsection{Количество заполненных этнохоронимов у стран}
+
+Выведем список стран, упорядоченный по количеству заполненных в Викиданных этнохоронимов.
+
+\begin{lstlisting}[language=SPARQL]
+#Count of demonyms in countries
+SELECT  ?country ?countryLabel (count(*) as ?count)
+WHERE
+{
+	?country wdt:P31 wd:Q6256.      #country
+	?country wdt:P1549 ?demonym .   #demonym
+	SERVICE wikibase:label { bd:serviceParam wikibase:language "ru" }
+}
+
+GROUP BY ?country ?countryLabel 
+ORDER BY DESC(?count)
+\end{lstlisting}
