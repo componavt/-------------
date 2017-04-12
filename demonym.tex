@@ -67,3 +67,25 @@ GROUP BY ?country ?countryLabel
 На 19 марта 2017 года Викиданные содежат 170 из 198 стран с незаполненными этнохоронимами.
 
 После заполнения авторами статьи этнохоронимов, число стран, у которых их нет на русском языке стало 69, а самих этнохоронимов на русском теперь языке 276 (на 20 марта 2017 года)
+
+\subsection{Количество заполненных этнохоронимов у стран}
+
+Выведем список стран, упорядоченный по количеству заполненных в Викиданных этнохоронимов.
+
+\begin{lstlisting}[language=SPARQL]
+#Count of demonyms in countries
+SELECT  ?country ?countryLabel (count(*) as ?count)
+WHERE
+{
+	?country wdt:P31 wd:Q6256.      #country
+	?country wdt:P1549 ?demonym .   #demonym
+	SERVICE wikibase:label { bd:serviceParam wikibase:language "ru" }
+}
+
+GROUP BY ?country ?countryLabel 
+ORDER BY DESC(?count)
+\end{lstlisting}
+
+\href{https://query.wikidata.org/#%23Count%20of%20demonyms%20in%20countries%0ASELECT%20%20%3Fcountry%20%3FcountryLabel%20%28count%28%2a%29%20as%20%3Fcount%29%0AWHERE%0A%7B%0A%09%3Fcountry%20wdt%3AP31%20wd%3AQ6256.%20%20%20%20%20%20%23country%0A%09%3Fcountry%20wdt%3AP1549%20%3Fdemonym%20.%20%20%20%23demonym%0A%09SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22ru%22%20%7D%0A%7D%0A%0AGROUP%20BY%20%3Fcountry%20%3FcountryLabel%20%0AORDER%20BY%20DESC%28%3Fcount%29%0A}{SPARQL-запрос}, 199 записей. 
+
+Наибольшее число этнохоронимов у Соединённых Штатов Америки (41 этнохороним), Великобритании (40), Германии (40), Канады (36) и России (34).
