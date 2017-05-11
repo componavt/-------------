@@ -8,3 +8,4 @@ subjects_government.tex
 shares_border_with.tex
 1768e.html
 figures/Bubble_chart_forms_of_government_countries_according_to_Wikidata/Bubble_chart_forms_of_government_countries_according_to_Wikidata.png
+5ba8.html
