@@ -79,16 +79,14 @@ GROUP BY ?country ?countryLabel
 Выведем список стран, упорядоченный по количеству заполненных в Викиданных этнохоронимов.
 
 \begin{lstlisting}[language=SPARQL label=countcountry, caption=Cтраны упорядоченные по количеству заполненных этнохоронимов]
-#Count of demonyms in countries
-SELECT  ?country ?countryLabel (count(*) as ?count)
+SELECT ?country ?countryLabel (count(*) as ?count)
 WHERE
 {
-	?country wdt:P31 wd:Q6256.      #country
-	?country wdt:P1549 ?demonym .   #demonym
-	SERVICE wikibase:label { bd:serviceParam wikibase:language "ru" }
+    ?country wdt:P31 wd:Q6256. # country
+    ?country wdt:P1549 ?demonym. # except with demonyms
+    SERVICE wikibase:label { bd:serviceParam wikibase:language "ru" }
 }
-
-GROUP BY ?country ?countryLabel 
+GROUP BY ?country ?countryLabel
 ORDER BY DESC(?count)
 \end{lstlisting}
 
