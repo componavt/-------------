@@ -79,6 +79,7 @@ GROUP BY ?country ?countryLabel
 Выведем список стран, упорядоченный по количеству заполненных в Викиданных этнохоронимов.
 
 \begin{lstlisting}[language=SPARQL label=countcountry, caption=Cтраны упорядоченные по количеству заполненных этнохоронимов]
+
 SELECT ?country ?countryLabel (count(*) as ?count)
 WHERE
 {
