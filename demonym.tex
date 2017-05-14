@@ -70,7 +70,7 @@ GROUP BY ?country ?countryLabel
 
 \href{https://query.wikidata.org/#%23List%20of%20countries%20without%20demonyms%20in%20Russian%0ASELECT%20%3Fcountry%20%3FcountryLabel%20%0AWHERE%0A%7B%0A%09%3Fcountry%20wdt%3AP31%20wd%3AQ6256.%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20country%0A%09MINUS%20%7B%20%3Fcountry%20wdt%3AP1549%20%3Fdemonym.%20%20%20%20%23%20except%20with%20demonyms%0A%20%20%20%20%20%20%20%20%20%20%20%20FILTER%28%28LANG%28%3Fdemonym%29%29%20%3D%20%22ru%22%29%20%23%20in%20Russian%0A%20%20%20%20%20%20%20%20%20%20%7D%20%20%20%20%0A%20%20%20%20%0A%09SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22ru%22%20%7D%0A%7D%0AGROUP%20BY%20%3Fcountry%20%3FcountryLabel}{SPARQL-запрос}, 170 записей. 
 
-На 19 марта 2017 года Викиданные содежат 170 из 198 стран с незаполненными этнохоронимами.
+На 19 марта 2017 года Викиданные содержат 170 из 198 стран с незаполненными этнохоронимами.
 
 После заполнения авторами статьи этнохоронимов, число стран, у которых их нет на русском языке стало 69, а самих этнохоронимов на русском языке теперь 276 (на 20 марта 2017 года).
 
