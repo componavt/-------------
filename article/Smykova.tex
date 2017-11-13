@@ -20,16 +20,12 @@
 \newtheorem{theoremb}{\indent Теорема}
 \renewcommand{\thetheoremb}{\Alph{theoremb}}%Нумерация теорем A, B, C
 
-\usepackage{color}
-
-\theoremstyle{remark}
-\newtheorem{Example}{\indent Example}
 \usepackage{listings}
-\usepackage{xcolor}
-\usepackage{hyperref}
-\definecolor{linkcolor}{HTML}{000000} % цвет ссылок
-\definecolor{urlcolor}{HTML}{000000} % цвет гиперссылок
 
+\usepackage{hyperref}
+\usepackage{url}
+ 
+\usepackage{color}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -57,9 +53,6 @@
 }
  
 \lstset{style=mystyle}
-
-
-\hypersetup{pdfstartview=FitH,  linkcolor=linkcolor,urlcolor=urlcolor, colorlinks=true}
  
 \usepackage{graphicx}
 
@@ -110,25 +103,25 @@
 \begin{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \fancyhead[CE]{ИНФОРМАТИКА, ВЫЧИСЛИТЕЛЬНАЯ ТЕХНИКА И УПРАВЛЕНИЕ}%Раздел журнала
-\fancyhead[CO]{А.~А.~Крижановский, Е.~М.~Смыкова. Анализ трёх аспектов современных стран по Викиданным:возраст стран, популярные формы правления и этнохоронимы}%
+\fancyhead[CO]{Е.~М.~Смыкова, А.~А.~Крижановский. Анализ трёх аспектов современных стран по Викиданным:возраст стран, популярные формы правления и этнохоронимы}%
 
 \UDC{519.689}
 
 \Rtitle{АНАЛИЗ ТРЁХ АСПЕКТОВ СОВРЕМЕННЫХ СТРАН ПО ВИКИДАННЫМ:ВОЗРАСТ СТРАН, ПОПУЛЯРНЫЕ ФОРМЫ ПРАВЛЕНИЯ И ЭТНОХОРОНИМЫ}%
 
 %\thispagestyle{izsc}%не убирать!!!
-\Rauthor{А.~А.~Крижановский$^1$, Е.~М.~Смыкова$^2$}%Если автор один, то номер не ставить
+\Rauthor{Е.~М.~Смыкова$^1$, А.~А.~Крижановский$^2$}%Если автор один, то номер не ставить
 
 %Фамилия Имя отчество, ученая степень, должность (с указанием кафедры, отдела), место работы (полное
 %официальное название учреждения, почтовый адрес), e-mail;
-\Raffil{$^1$Крижановский Андрей Анатольевич, кандидат технических наук,  руководитель 
+\Raffil{$^1$Смыкова Елизавета Михаловна, студентка Петрозаводского Государственного Университета, Россия, 185910, Петрозаводск, Ленина, 33, esmykova8@gmail.com\\
+$^2$Крижановский Андрей Анатольевич, кандидат технических наук,  руководитель 
 Лаборатории информационных компьютерных технологий 
-Института прикладных математических исследований, Россия, 185001 , Петрозаводск, Астраханская, 83, .ru\\
-$^2$Смыкова Елизавета Михаловна, студентка Петрозаводского Государственного Университета, Россия, 185026, Петрозаводск, Улица, 13, esmykova8@gmail.com}
+Института прикладных математических исследований, Россия, 185910 , Петрозаводск, Пушкинская, 11, andrew.krizhanovsky@gmail.com}
 
 \Rabstract{Эта статья посвящена исследованию стран на основе базы знаний международного проекта Викиданные. С помощью SPARQL-запросов, вычисляемых на объектах типа "страна" в Викиданных, получены: выведен список всех ныне существующих стран, перечень стран, упорядоченных по дате создания, список этнохоронимов стран, пузырьковая диаграмма с формами правления стран и граф соседних стран. Кроме того, сделаны отностительно полноты Викиданных по данной теме.}
 
-\Rkeywords{ключевые слова через запятую}
+\Rkeywords{Викиданные, анализ данных, страны}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Текст статьи
@@ -143,7 +136,7 @@ $^2$Смыкова Елизавета Михаловна, студентка Петрозаводского Государственного Унив
     \item Свойство: \href{https://www.wikidata.org/wiki/Property:P31}{экземпляр (P31)}.
 \end{itemize}
 
-\begin{lstlisting}[label=instcountry, caption=Список стран]
+\begin{lstlisting}[language=SPARQL, label=instcountry, caption=Список стран]
 #List of `instances of` "country" 
 SELECT ?lang ?langLabel
 WHERE
@@ -174,7 +167,7 @@ WHERE
     \item Свойство: \href{https://www.wikidata.org/wiki/Property:P571}{дата основания (P571)}.
 \end{itemize}
 
-\begin{lstlisting}[label=countryinception, caption=Список стран упорядоченных по дате создания]
+\begin{lstlisting}[language=SPARQL, label=countryinception, caption=Список стран упорядоченных по дате создания]
 #List of `instances of` "countries sorted by inception" 
 SELECT ?country ?countryLabel ?inception
 WHERE
@@ -190,7 +183,7 @@ ORDER BY (?inception)
 
 \href{https://query.wikidata.org/#%23List%20of%20%60instances%20of%60%20%22countries%20sorted%20by%20inception%22%20%0ASELECT%20%3Fcountry%20%3FcountryLabel%20%3Finception%0AWHERE%0A%7B%0A%20%20%20%20%3Fcountry%20wdt%3AP31%20wd%3AQ6256.%0A%20%20%20%20%3Fcountry%20wdt%3AP571%20%3Finception%20.%0A%20%20%20%20%0A%20%20%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20%7D%0A%7D%0A%0AORDER%20BY%20%28%3Finception%29}{SPARQL-запрос}, 112 записей.
 
-В результате выполнения запроса получен список стран с датами их создания. Например, \href{https://www.wikidata.org/wiki/Q23334}{Абхазия} -- 1 января 0786, \href{https://www.wikidata.org/wiki/Q159}{Россия} -- 1 января 0862, \href{https://www.wikidata.org/wiki/Q1246}{Косово} -- 17 февряля 2008, \href{https://www.wikidata.org/wiki/Q958}{Южный Судан} -- 9 июля 2011.
+В результате выполнения запроса ~\ref{countryinception} получен список стран с датами их создания. Например, \href{https://www.wikidata.org/wiki/Q23334}{Абхазия} -- 1 января 0786, \href{https://www.wikidata.org/wiki/Q159}{Россия} -- 1 января 0862, \href{https://www.wikidata.org/wiki/Q1246}{Косово} -- 17 февряля 2008, \href{https://www.wikidata.org/wiki/Q958}{Южный Судан} -- 9 июля 2011.
 
 Годы, в которые было создано наибольшее количество стран -- 1991 (17 стран), 1812 (6 стран) и 1918 (5 стран). 
 
@@ -198,7 +191,7 @@ ORDER BY (?inception)
 
 Проанализируем полноту Викиданных.
 \begin{itemize}
-    \item По данным "Общероссийского классификатора стран мира"~\cite{oksm} за 2016 год на земле существует 251 страна.
+    \item По данным "Общероссийского классификатора стран мира"~\cite{Oksm} за 2016 год на земле существует 251 страна.
     \item В этой задаче не учитываются древние, уже не существующие государства (например: \href{https://www.wikidata.org/wiki/Q41137}{Ассирия (Q41137)}), поскольку они являются экземпляром не объекта "country", а объекта "former country" (бывшие страны). Отметим, что количество бывших стран на порядок больше существующих ныне стран (см. \href{https://query.wikidata.org/#SELECT%20%3Fitem%20%3Flabel%20%3F_image%20WHERE%20%7B%0A%20%20%3Fitem%20wdt%3AP31%20wd%3AQ3024240.%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%20%0A%20%20%20%20%3Fitem%20rdfs%3Alabel%20%3Flabel%0A%20%20%7D%0A%20%20%0AOPTIONAL%20%7B%20%3Fitem%20wdt%3AP18%20%3F_image.%20%7D%0A%7D%0A}{SPARQL-запрос}, возвращающий более двух тысяч таких стран).
 
     \item По данным категории \href{https://ru.wikipedia.org/wiki/%D0%90%D0%BB%D1%84%D0%B0%D0%B2%D0%B8%D1%82%D0%BD%D1%8B%D0%B9_%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D1%81%D1%82%D1%80%D0%B0%D0%BD_%D0%B8_%D1%82%D0%B5%D1%80%D1%80%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D0%B9}{"Алфавитный список стран и территорий"} Русской Википедии существует  252 страны. (В "Общероссийском классификаторе стран мира" недостает \href{https://www.wikidata.org/wiki/Q1246}{Косово})
@@ -218,7 +211,7 @@ ORDER BY (?inception)
     \item Свойство: \href{https://www.wikidata.org/wiki/Property:P571}{дата основания (P571)}.
 \end{itemize}
 
-\begin{lstlisting}[label=countrywithoutinception, caption=Список стран с пустым свойством "дата создания"]
+\begin{lstlisting}[language=SPARQL, label=countrywithoutinception, caption=Список стран с пустым свойством "дата создания"]
 #List of `instances of` "countries without an inception" 
 SELECT ?country ?countryLabel 
 WHERE
@@ -232,10 +225,14 @@ WHERE
 
 \href{https://query.wikidata.org/#%23List%20of%20%60instances%20of%60%20%22countries%20without%20a%20inception%22%20%0ASELECT%20%3Fcountry%20%3FcountryLabel%20%0AWHERE%0A%7B%0A%20%20%20%20%3Fcountry%20wdt%3AP31%20wd%3AQ6256.%20%23country%0A%20%20%20%20%0A%20%20%20%20MINUS%20%7B%20%3Fcountry%20wdt%3AP571%20%5B%5D%20%7D%20.%20%23inception%20of%20country%0A%20%20%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20%7D%0A%7D%0A%0A}{SPARQL-запрос}, 100 записей.
 
-Итак, на 6 марта 2017 года Викиданные содержат 100 из 198 записей о ныне существующих странах с неизвестным годом основания страны.
+Итак, на 6 марта 2017 года Викиданные содержат 100 из 198 записей о ныне существующих странах с неизвестным годом основания страны.~\ref{countrywithoutinception}
 
 \section{ЭТНОХОРОНИМЫ НА РУССКОМ ЯЗЫКЕ}
 Этнохороним -- название жителей определённой местности соотнесённое с топонимом. Например, Россия -- россияне, россиянин, россиянка, Чехия -- чехи, чех, чешка.
+
+Помимо географического мотиватора, новых лексемы, используемые для определения происхождения либо принадлежности, происходят так же от этнических, политических, религиозных характеристик людей. 
+
+Название жителей может исходить от наименования различных объектов земной поверхности — гор, островов, континентов. Так же обозначение места происхождения людей может зависеть от политико-административного делению. Например, для обозначения гражданства; Украина -- украинцы, Канада -- канадцы. Внутригосударственное деление так же может породить новые наименования, Крым -- крымчане. ~\cite{Zhuravleva}
 
 Построим список стран у которых есть этнохоронимы на русском языке.
 
@@ -244,7 +241,7 @@ WHERE
 \item Свойство: \href{https://www.wikidata.org/wiki/Property:P1549}{этнохороним (P1549)}.
 \end{itemize}
 
-\begin{lstlisting}[label=countrydemonyms, caption=Список стран с этнохоронимами на русском языке]
+\begin{lstlisting}[language=SPARQL, label=countrydemonyms, caption=Список стран с этнохоронимами на русском языке]
 #List of countries with demonyms in Russian
 SELECT ?country ?countryLabel 
 WHERE
@@ -261,12 +258,12 @@ GROUP BY ?country ?countryLabel
 
 \href{https://query.wikidata.org/#%23List%20of%20countries%20with%20demonyms%20in%20Russian%0ASELECT%20%3Fcountry%20%3FcountryLabel%20%0AWHERE%0A%7B%0A%09%3Fcountry%20wdt%3AP31%20wd%3AQ6256.%20%20%20%20%20%20%20%23country%0A%09%3Fcountry%20wdt%3AP1549%20%3Fdemonym%20.%20%20%20%20%23demonym%0A%09FILTER%28%28LANG%28%3Fdemonym%29%29%20%3D%20%22ru%22%29%0A%09SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22ru%22%20%7D%0A%7D%0A%0AGROUP%20BY%20%3Fcountry%20%3FcountryLabel}{SPARQL-запрос}, 28 записей.
 
-На 19 марта 2017 года Викиданные содежали 28 из 198 стран с заполненными этнохоронимами на русском языке.
+На 19 марта 2017 года Викиданные содежали 28 из 198 стран с заполненными этнохоронимами на русском языке.~\ref{countrydemonyms}
 
 \section{СПИСОК ЭТНОХОРОНИМОВ}
 
 Выведем список всех этнохоронимом на русском языке.
-\begin{lstlisting}[label=listdemonym, caption=Список этнохоронимов на русском языке]
+\begin{lstlisting}[language=SPARQL, label=listdemonym, caption=Список этнохоронимов на русском языке]
 #List of demonyms in Russian
 SELECT ?country ?countryLabel ?demonym
 WHERE
@@ -282,13 +279,13 @@ WHERE
 
 \href{https://query.wikidata.org/#%23List%20of%20demonyms%20in%20Russian%0ASELECT%20%3Fcountry%20%3FcountryLabel%20%3Fdemonym%0AWHERE%0A%7B%0A%09%3Fcountry%20wdt%3AP31%20wd%3AQ6256.%20%20%20%20%20%20%23country%0A%09%3Fcountry%20wdt%3AP1549%20%3Fdemonym%20.%20%20%20%23demonym%0A%09FILTER%28%28LANG%28%3Fdemonym%29%29%20%3D%20%22ru%22%29%0A%09SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22ru%22%20%7D%0A%7D}{SPARQL-запрос}, 83 записей.
 
-На 19 марта 2017 года Викиданные содежат 83 заполненных этнохоронима.
+На 19 марта 2017 года Викиданные содежат 83 заполненных этнохоронима.~\ref{listdemonym}
 
 \section{СТРАНЫ С НЕЗАПОЛНЕННЫМИ ЭТНОХОРОНИМАМИ}
 
 Построим список стран, у которых нет этнохоронимов на русском языке.
 
-\begin{lstlisting}[label=countrywithoutdemonyms, caption=Список стран у которых нет этнохоронимов на русском языке]
+\begin{lstlisting}[language=SPARQL, label=countrywithoutdemonyms, caption=Список стран у которых нет этнохоронимов на русском языке]
 #List of countries without demonyms in Russian
 SELECT ?country ?countryLabel 
 WHERE
@@ -306,7 +303,7 @@ GROUP BY ?country ?countryLabel
 
 \href{https://query.wikidata.org/#%23List%20of%20countries%20without%20demonyms%20in%20Russian%0ASELECT%20%3Fcountry%20%3FcountryLabel%20%0AWHERE%0A%7B%0A%09%3Fcountry%20wdt%3AP31%20wd%3AQ6256.%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20country%0A%09MINUS%20%7B%20%3Fcountry%20wdt%3AP1549%20%3Fdemonym.%20%20%20%20%23%20except%20with%20demonyms%0A%20%20%20%20%20%20%20%20%20%20%20%20FILTER%28%28LANG%28%3Fdemonym%29%29%20%3D%20%22ru%22%29%20%23%20in%20Russian%0A%20%20%20%20%20%20%20%20%20%20%7D%20%20%20%20%0A%20%20%20%20%0A%09SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22ru%22%20%7D%0A%7D%0AGROUP%20BY%20%3Fcountry%20%3FcountryLabel}{SPARQL-запрос}, 170 записей. 
 
-На 19 марта 2017 года Викиданные содержат 170 из 198 стран с незаполненными этнохоронимами.
+На 19 марта 2017 года Викиданные содержат 170 из 198 стран с незаполненными этнохоронимами.~\ref{countrywithoutdemonyms}
 
 После заполнения авторами статьи этнохоронимов, число стран, у которых их нет на русском языке стало 69, а самих этнохоронимов на русском языке теперь 276 (на 20 марта 2017 года).
 
@@ -314,7 +311,7 @@ GROUP BY ?country ?countryLabel
 
 Выведем список стран, упорядоченный по количеству заполненных в Викиданных этнохоронимов.
 
-\begin{lstlisting}[label=countcountry, caption=Cтраны упорядоченные по количеству заполненных этнохоронимов]
+\begin{lstlisting}[language=SPARQL, label=countcountry, caption=Cтраны упорядоченные по количеству заполненных этнохоронимов]
 #Сount of demonyms in countries
 SELECT ?country ?countryLabel (count(*) as ?count)
 WHERE
@@ -329,7 +326,7 @@ ORDER BY DESC(?count)
 
 \href{https://query.wikidata.org/#%23Count%20of%20demonyms%20in%20countries%0ASELECT%20%20%3Fcountry%20%3FcountryLabel%20%28count%28%2a%29%20as%20%3Fcount%29%0AWHERE%0A%7B%0A%09%3Fcountry%20wdt%3AP31%20wd%3AQ6256.%20%20%20%20%20%20%23country%0A%09%3Fcountry%20wdt%3AP1549%20%3Fdemonym%20.%20%20%20%23demonym%0A%09SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22ru%22%20%7D%0A%7D%0A%0AGROUP%20BY%20%3Fcountry%20%3FcountryLabel%20%0AORDER%20BY%20DESC%28%3Fcount%29%0A}{SPARQL-запрос}, 199 записей. 
 
-Наибольшее число этнохоронимов у Соединённых Штатов Америки (41 этнохороним), затем идут Великобритания (40), Германия (40), Канада (36) и Россия (34).
+Наибольшее число этнохоронимов у Соединённых Штатов Америки (41 этнохороним), затем идут Великобритания (40), Германия (40), Канада (36) и Россия (34).~\ref{countcountry}
 
 \section{ФОРМЫ ПРАВЛЕНИЯ СТРАН}
 
@@ -340,7 +337,7 @@ ORDER BY DESC(?count)
     \item Свойство: \href{https://www.wikidata.org/wiki/Property:P122}{форма правления (P122)}.
 \end{itemize}
 
-\begin{lstlisting}[label=government, caption=Пузырьковая диаграмма форм правления стран]
+\begin{lstlisting}[language=SPARQL, label=government, caption=Пузырьковая диаграмма форм правления стран]
 #basic form of government ranking
 #defaultView:BubbleChart
 SELECT ?bfog ?form (count(*) as ?count)
@@ -359,10 +356,14 @@ ORDER BY DESC(?count) ASC(?form)
 
 \href{https://query.wikidata.org/#%23basic%20form%20of%20government%20ranking%0A%23defaultView%3ABubbleChart%0ASELECT%20%3Fbfog%20%3Fform%20%28count%28%2a%29%20as%20%3Fcount%29%0AWHERE%20%0A%7B%0A%20%20%20%20%3Fcountry%20wdt%3AP31%20wd%3AQ6256.%0A%20%20%20%20%3Fcountry%20wdt%3AP122%20%3Fbfog%20.%0A%20%20%20%20OPTIONAL%20%7B%0A%09%09%3Fbfog%20rdfs%3Alabel%20%3Fform%0A%09%09filter%20%28lang%28%3Fform%29%20%3D%20%22ru%22%29%0A%09%7D%0A%7D%0AGROUP%20BY%20%3Fbfog%20%3Fform%0AORDER%20BY%20DESC%28%3Fcount%29%20ASC%28%3Fform%29}{SPARQL-запрос}, 30 записей.
 
-\includegraphics[width=0.5\linewidth]{Bubble_chart_forms_of_government_countries_accordi}
+\begin{figure}[h]
+\center{\includegraphics[width=0.5\linewidth]{Bubble_chart_forms_of_government_countries_accordi}}
+\caption{Пузырьковая диаграмма форм правления стран.}
+\label{ris:Bubble_chart_forms_of_government_countries_accordi}
+\end{figure}
 
-В результате выполнения запроса~\ref{government} мы получаем пузырьковую диаграмму с наиболее распространенными формами правления в странах. 
-Основные формы правления стран: республика (в 20 странах), конституционная монархия (в 18 странах), федеративная республика (в 18 странах), парламентская республика (в 17 странах) и президентская республика (в 12 странах).  \label{ris:Bubble_chart_forms_of_government_countries_accordi}
+В результате выполнения запроса ~\ref{government} мы получаем пузырьковую диаграмму ~\ref{ris:Bubble_chart_forms_of_government_countries_accordi} с наиболее распространенными формами правления в странах. 
+Основные формы правления стран: республика (в 20 странах), конституционная монархия (в 18 странах), федеративная республика (в 18 странах), парламентская республика (в 17 странах) и президентская республика (в 12 странах).  
 
 \section{СОСЕДНИЕ СТРАНЫ}
 
@@ -373,7 +374,7 @@ ORDER BY DESC(?count) ASC(?form)
     \item Свойство: \href{https://www.wikidata.org/wiki/Property:P47}{имеет границы с (P47)}.
 \end{itemize}
 
-\begin{lstlisting}[]
+\begin{lstlisting}[language=SPARQL, label=borderWith, caption=Граф соседних стран]
 #neighboring countries graph
 #defaultView:Graph
 SELECT ?country ?countryLabel ?sharesBorderWith ?sharesBorderWithLabel
@@ -388,41 +389,43 @@ WHERE
 
 \href{https://query.wikidata.org/#%23neighboring%20countries%20graph%0A%23defaultView%3AGraph%0ASELECT%20%3Fcountry%20%3FcountryLabel%20%3FsharesBorderWith%20%3FsharesBorderWithLabel%0AWHERE%0A%7B%0A%20%20%20%20%3Fcountry%20wdt%3AP31%20wd%3AQ6256.%0A%0A%20%20%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22ru%22%20%7D%0A%20%20%20%20OPTIONAL%20%7B%20%3Fcountry%20wdt%3AP47%20%3FsharesBorderWith%20.%20%7D%0A%0A%7D%0A}{SPARQL-запрос}, 787 записей.
 
-\includegraphics[width=1\linewidth]{Neighboring_countries_graph_in_russian_according_t}
+В результате выполнения запроса ~\ref{borderWith} мы получаем граф ~\ref{ris:Neighboring_countries_graph_in_russian_according_t} с 787 ребрами, где ребро -- это соседство между двумя странами. Граф представляет из себя несколько связных компонент, так как есть островные страны, у которых нет соседей (например, \href{https://www.wikidata.org/Q1027}{Маврикий}, \href{https://www.wikidata.org/Q826}{Мальдивы}, \href{https://www.wikidata.org/Q1019}{Мадагаскар}). 
 
-В результате выполнения запроса мы получаем граф \ref{808983} с 787 ребрами, где ребро -- это соседство между двумя странами. Граф представляет из себя несколько связных компонент, так как есть островные страны, у которых нет соседей (например, \href{https://www.wikidata.org/Q1027}{Маврикий}, \href{https://www.wikidata.org/Q826}{Мальдивы}, \href{https://www.wikidata.org/Q1019}{Мадагаскар}). 
+\begin{figure}[h!]
+\includegraphics[width=0.9\linewidth]{Neighboring_countries_graph_in_russian_according_t}
+\caption{Граф соседних стран, в центре Россия.}
+\label{ris:Neighboring_countries_graph_in_russian_according_t}
+\end{figure}
 
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Библиографический список
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{Rtwocolbib}%Не убирать!!!
 %Для книг: Фамилии И.О. всех авторов. Заглавие издания.
 %Город~: Издательство, год издания. Количество страниц.
-%Например:
-\bibitem{Petr1}
-\textit{Ильин~В.~А.} Избранные труды~: в 2~т. Т.~2. М.~: МАКС
-Пресс, 2008. 692~с.
+%Например:/1}
+\bibitem{Oksm}
+\textit{Общероссийский классификатор стран мира} URL: http://classifikators.ru/oksm  (дата обращения: 11.11.2017).
+
+\bibitem{Zhuravleva}
+\textit{Н.Ю. Журавлева} Особенности перевода катойконимов (на материале испанского и русского языков) // Вестник Российского университета дружбы народов. — 2012. — P. 41–48.
 
 \end{Rtwocolbib}%Не убирать!!!
 
 \language=0%English
 
-\Etitle{Analysis of the Three Aspects of Modern Countries on the Wikidate: the Age of Countries, Popular Forms of Government and demonyms}
 
 \Eauthor{A.~A.~Krizhanovsky$^1$, E.~M.~Smykova$^2$}%
 
 %На англ. языке: Имя О. Фамилия, официальное название организации, почтовый адрес
 %организации, e-mail автора
-\Eaffil{$^1$Andrew A. Krizhanovsky, ORCID: 0000-0002-7926-1347, Saratov
-State University, 83, Astrakhanskaya str.,  Saratov, Russia, 410012, PetrovIO@info.sgu.ru\\
-$^2$Elizaveta M. Smykova, ORCID: 0000-0002-0426-2046, Petrozavodsk State University, 13,
-Enthusiasts str.,
- Petrozavodsk, Russia, 185026, esmykova8@gmail.com}%
+\Eaffil{$^1$Elizaveta M. Smykova, ORCID: 0000-0002-0426-2046, Petrozavodsk State University, 33, Lenina str., Petrozavodsk, Russia, 185910, esmykova8@gmail.com \\
+$^2$Andrew A. Krizhanovsky, ORCID: 0000-0002-7926-1347, Institute of Applied Mathematical Research of the Karelian Research Centre of the Russian Academy of Sciences, 11, Pushkinskayastr., Petrozavodsk, Russia, 185910, andrew.krizhanovsky@gmail.com}%
 
 \Eabstract{This research is devoted to the study of countries based on the knowledge base of the Wikidata international project. SPARQL queries were used in order to analyse and compare "countries" objects in Wikidata. A list of all currently existing countries, a list of countries ordered by date of creation, a list of demonyms of countries were generated. A bubble chart with the forms of government of countries and a graph of neighboring countries were constructed. In addition, conclusions were drawn regarding the completeness of the Wikidata for this topic.}%
 
-\Ekeywords{ключевые слова на английском языке}
-
+\Ekeywords{Wikidate, data analysis, countries}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -431,149 +434,16 @@ Enthusiasts str.,
 
 
 \begin{Etwocolbib}%Не убирать!!!
-\bibitem{ePetr1}Il'in~V.~A. \textit{Izbrannye trudy} [Chosen works]. Vol.~2.
-Moscow, MAKS Press, 2008. 692~p. (in Russian).
+\bibitem{Oksm}
+\textit{Russian classification of countries of the world} URL: http://classifikators.ru/oksm  (Accessed  11, November, 2017).
+
+\bibitem{Zhuravleva}
+\textit{N.Y. Zhuravleva} Features of translation katoykonimov (on a material of the Spanish and Russian languages) // Bulletin of the Peoples Friendship University of Russia. — 2012. — P. 41–48.
 
 
 \end{Etwocolbib}%Не убирать!!!
 \language=1%Русский
 
-\newpage
-
-\begin{center}
-\textbf{ПРИМЕРЫ}
-\end{center}
-
-\textbf{Описание книги (монографии,
-сборники)}
-
-\textit{Агаев~Г.~Н., Виленкин~Н.~Я., Джафарли~Г.~М.,
-Рубинштейн~А.~И.} Мультипликативные системы функций и
-гармонический анализ на нульмерных группах. Баку~: Элм, 1981.
-180~c.
-
-Agaev~G.~N., Vilenkin~N.~Ya., Dzafarli~G.~M., Rubinstein~A.~I.
-\textit{Mul'tiplikativnye sistemy funkcij i garmonicheskij analiz
-na nul'mernyh gruppah} [Multiplicative Systems of Functions and
-Harmonic Analysis on Zero-Dimensional Groups]. Baku, Elm, 1981,
-180~p.  (in Russian).
-
-\textbf{Описание переводной
-книги}
-
-\textit{Каргаполов~М.~И., Мерзляков~Ю.~И.} Основы теории групп.
-М.~: Наука, 1982. 288~с.
-
-Kargapolov~M.~I., Merzljakov~Ju.~I. \textit{Fundamentajs of
-the Theory of Groups}. New York, Springer-Verlag, 1979, 203~p.
-(Rus. ed.~: Kargapolov~M.~I., Merzljakov~Ju.~I. Osnovy teorii
-grupp. Moscow, Nauka, 1982,  288~p.)
 
 
-\textbf{Описание статьи из журнала}
-
-\textbf{\textit{Переводные}}
-
-\textit{Бурлуцкая~М.~Ш., Курдюмов~В.~П., Луконина~А.~С.,
-Хромов~А.~П.} Функционально-дифференциальный оператор с
-инволюцией~// ДАН. 2007. Т.~414. №~4. С.~443--446.
-
-Burlutskaya~M.~Sh., Kurdyumov~V.~P., Lukonina~A.~S.,
-Khromov~A.~P. A func\-tio\-nal-differential operator with
-involution. \textit{Doklady Math.}, 2007,  vol.~75, no.~3,
-pp.~399--402.
-
-
-{\textbf{\textit{Непереводные}}}
-
-\textit{Хромов~А.~П.} Смешанная задача для дифференциального
-уравнения с инволюцией и потенциалом специального вида~// Изв.
-Сарат. ун-та. Нов. сер. Сер. Математика. Механика. Информатика.
-2010. Т.~10, вып.~4. С.~17--22.
-
-Khromov~A.~P. The mixed problem for the differential equation
-with involution and potential of the special kind. \textit{Izv.
-Saratov Univ. (N.\,S.), Ser. Math. Mech. Inform.}, 2010,  vol.~10,
-iss.~4, pp.~17--22 (in Russian).
-
-{\textbf{Описание статьи с doi}}
-
-\textit{Хромов~А.~П.} Об обращении интегральных операторов с
-ядрами, разрывными на диагоналях~// Мат. заметки. 1998. Т.~64,
-№~6. С.~932--949. DOI: 10.4213/mzm1472.
-
-Khromov~A.~P. Inversion of integral operators with kernels
-discontinuous on the diagonal. \textit{Math. Notes}. 1998,
-vol.~64, no.~6, pp.~804--813. DOI: 10.4213/mzm1472.
-
-\textbf{Описание статьи в электронном
-журнале}
-
-\textit{Орлянская~И.~В.} Современные подходы к построению
-методов глобальной оптимизации // Электронный журнал <<Исследовано
-в России>>. С.~2097--2108. URL: http://zhurnal.ape.relarn.ru/
-articles/2002/189.pdf  (дата обращения: 02.12.2011).
-
-Orlyanskaya I. V. Modern approaches to global optimization
-methods building. \textit{Online journal <<Issledovano v
-Rossii>>}, pp. 2097--2108. Available at:
-http://zhurnal.ape.relarn.ru/articles/ 2002/189.pdf (Accessed 02,
-December, 2012).
-
-\textbf{Описание статьи из сборника трудов}
-
-\textit{Челноков~Ю.~Н.} Оптимальная переориентация орбиты
-космического аппарата посредством реактивной тяги, ортогональной
-плоскости орбиты // Математика. Механика~: сб. науч. тр. Саратов~:
-Изд-во Сарат. ун-та, 2006. Вып.~8. С.~231--234.
-
-Chelnokov~Yu.~N. Optimal'naja pereorientacija orbity
-kosmicheskogo apparata posredstvom reaktivnoj tjagi, ortogonal'noj
-ploskosti orbity [Optimal reorientation of spacecraft's orbit
-through thrust orthogonal to the plane of orbit].
-\textit{Matematika. Mehanika} [Mathematics. Mechanics]. Saratov,
-Saratov Univ. Press, 2006, iss.~8, pp.~231--234 (in Russian).
-
-\textbf{Описание материалов конференций}
-
-\textit{Андреев~А.~А.} О корректности краевых задач для
-некоторых уравнений в частных производных с карлемановским
-сдвигом~// Дифференциальные уравнения и их приложения~: тр. 2-го
-междунар. семинара. Самара, 1998. С.~5--18.
-
-Andreev~A.~A. About the correctness of boundary problems for
-some equations with calimanesti shift. \textit{Differentsial'nye
-uravneniia i ikh prilozheniia~: trudy 2-go mezhdunarodnogo
-seminara} [Differential equations and their applications~:
-proceedings of the 2nd international workshop]. Самара, 1998,
-pp.~5--18 (in Russian).
-
-
-\textbf{Описание Интернет-ресурса}
-
-Illumina, Inc. URL: http://www. illumina.com/  (дата
-обращения: 18.05.2012).
-
-\textit{Illumina, Inc.} Available at: http://
-www.illumina.com/  (Accessed  18, May, 2012).
-
-\textbf{Описание диссертации или автореферата диссертации}
-
-\textit{Терехин~П.~А.} Аффинные системы функций и фреймы в
-банаховом пространстве : дис. ... д-ра физ.-мат. наук. Саратов,
-2010. 230~с.
-
-Terekhin~P.~A. \textit{Affinnye sistemy funkcij i frejmy v
-banahovom prostranstve}. Diss. dokt. fiz.-mat. nauk [Affine
-systems of functions and frames in Banach space : Dr. phys. and
-math. sci. diss.]. Saratov, 2010. 230 p. (in Russian).
-
-\textbf{Описание ГОСТа}
-
-ГОСТ 27.002-89. Надежность в технике. Основные понятия.
-Термины и определения. М., 1990. 24~с.
-
-State Standard 27.002-89. Industrial product dependability.
-General concepts. Terms and definitions. Moscow, Standartinform,
-1990. 24~p. (in Russian).
 \end{document}
